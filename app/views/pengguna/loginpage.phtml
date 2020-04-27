@@ -13,7 +13,10 @@
     </p>
 
     <p>
-        <?php echo $this->tag->submitButton("Login"); ?>
+        <?php 
+        echo $this->tag->submitButton("Login") . " ";
+        echo $this->tag->linkTo("/", "Go back home");
+        ?>
     </p>
 
 </form>

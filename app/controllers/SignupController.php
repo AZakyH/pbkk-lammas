@@ -22,7 +22,6 @@ class SignupController extends \Phalcon\Mvc\Controller
             $security = new Security();
             
             $hashed = $security->hash($dataSent["password"]);
-            
             $user->password = $hashed;
             $user->nama = $dataSent["nama"];
             $user->nrp = $dataSent["nrp"];

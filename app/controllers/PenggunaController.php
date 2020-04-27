@@ -22,9 +22,8 @@ class PenggunaController extends \Phalcon\Mvc\Controller
         { 
          $nrp    = $this->request->getPost('nrp');
          $password = $this->request->getPost('password');
-         echo $nrp . $password;
          echo "</br>";
-         $user = Pengguna::findFirst(
+         $user = Pengguna::findFirst(     // Nyari user berdasar NRP yang diinput
              [
                  'conditions' => 'nrp = :nrp:',
                  'bind'       => [
@@ -33,58 +32,34 @@ class PenggunaController extends \Phalcon\Mvc\Controller
              ]
          );
  
-         if ($user) {
-            echo "user ada ";
-            echo "</br>";
-
-            echo "pass " . $user->password;
-            echo "</br>";
-
+         if ($user) { //Memeriksa apakah user ada
             $check = $this
                ->security
-               ->checkHash($password, $user->password);
-            echo "cek : " . $check;
-            echo "</br>";
+               ->checkHash($password, $user->password); //Memeriksa apakah password sesuai
 
-             if (true == $check) {
-                 // OK
-                 echo "kamu berhasil";
+             if (true == $check) {  
+                 //Password benar
+                 $this->session->set('user_id', $user->id_user);
+                 $this->session->set('nama_user', $user->nama);
+                 $this->session->set('nrp', $user->nrp);
+                 $this->session->set('isAdmin', $user->isAdmin);
+                 return $this->dispatcher->forward(array( 
+                     'controller' => 'index',
+                     'action' => 'index' 
+                 )); 
              }
              else {
-                echo "kamu gagallol";
+                //Password salah
+                echo "Wrong password!";
+                header("refresh:2;url=/pengguna/loginpage");
              }
-         } else {
-             echo "NRP atau password salah";
+         }
+         else {
+            //User tidak ada di database
+             echo "User doesn't exist!";
+             header("refresh:2;url=/pengguna/loginpage");
              $this->security->hash(rand());
          }
-         //   $user = Pengguna::findFirst(array( 
-         //      'nama = :nama: and password = :password:',
-         //      'bind' => array( 
-         //         'nama' => $this->request->getPost("nama"), 
-         //         'password' => $this->request->getPost("password") 
-         //      ) 
-         //   ));  
-         //   if ($user === false) { 
-         //      $this->flash->error("Incorrect credentials"); 
-         //      return $this->dispatcher->forward(array( 
-         //         'controller' => 'index','action' => 'index' 
-         //      )); 
-         //   } 
-         //   $message = "loginmu berhasil";
-         //   $this->session->set('auth', $user);
-         // //   return $this->dispatcher->forward(array( 
-         // //    'controller' => 'index',
-         // //    'action' => 'index',
-         // //    // 'params'=> array(1, 2, 3)
-         // //   ));  
-         //   return $this->dispatcher->forward([
-         //    "controller" => "index",
-         //    "action" => "index",
-         //    "params" => [
-         //        "BISAPLIZ"
-         //    ]
-         //    ]);
-            
         }
      }
 

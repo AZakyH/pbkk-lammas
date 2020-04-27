@@ -1,10 +1,10 @@
 <?php
 
-if ($this->session->has('auth')) {
+if ($this->session->has('nama_user')) {
     // Retrieve its value
-    $id = $this->session->get('auth', 'nama');
+    $nama = $this->session->nama_user;
 
-echo "Welcome " . $id . "!</br>";
+echo "Welcome " . $nama . "!</br>";
 echo $this->tag->linkTo("/pengguna/logout", "Logout");
 }
 else {
