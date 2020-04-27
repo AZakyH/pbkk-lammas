@@ -6,7 +6,7 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-
+        $this->view->users = Pengguna::find();
     }
 
 }

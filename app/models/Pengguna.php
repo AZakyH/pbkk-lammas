@@ -13,6 +13,18 @@ class Pengguna extends \Phalcon\Mvc\Model
      *
      * @var string
      */
+    public $username;
+
+    /**
+     *
+     * @var string
+     */
+    public $password;
+
+    /**
+     *
+     * @var string
+     */
     public $nama;
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+use Phalcon\Security;
+
 class SignupController extends \Phalcon\Mvc\Controller
 {
 
@@ -12,30 +14,28 @@ class SignupController extends \Phalcon\Mvc\Controller
     {
         $user = new Pengguna();
 
-        // Store and check for errors
-        // $success = $user->save(
-        //     $this->request->getPost(),
-        //     [
-        //         "nama",
-        //         "nrp",
-        //     ]
-        // );
         if($this->request->isPost())
         {
             $dataSent = $this->request->getPost();
 
             $user = new Pengguna();
+            $security = new Security();
+            
+            $hashed = $security->hash($dataSent["password"]);
+            
+            $user->password = $hashed;
             $user->nama = $dataSent["nama"];
             $user->nrp = $dataSent["nrp"];
             $user->alamat = $dataSent["alamat"];
             $user->no_telp = $dataSent["no_telp"];
-            $user->isAdmin = $dataSent["isAdmin"];
+            $user->isAdmin = 0;
 
             $success = $user->save();
         }
 
         if ($success) {
             echo "Thanks you for signing up!";
+            header("refresh:2;url=/");
         } else {
             echo "Oops, seems like the following issues were encountered: ";
 

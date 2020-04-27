@@ -1,9 +1,9 @@
 <h2>Sign up using this form</h2>
 
 <?php echo $this->tag->form("signup/register"); ?>
-
+    
     <p>
-        <label for="nama">Name</label>
+        <label for="nama">Nama</label>
         <?php echo $this->tag->textField("nama"); ?>
     </p>
 
@@ -13,18 +13,18 @@
     </p>
 
     <p>
-        <label for="alamat">alamat</label>
-        <?php echo $this->tag->textField("alamat"); ?>
-    </p>
-
-    <p>
-        <label for="no_telp">no_telp</label>
+        <label for="no_telp">Nomor Telepon</label>
         <?php echo $this->tag->textField("no_telp"); ?>
     </p>
 
     <p>
-        <label for="isAdmin">isAdmin</label>
-        <?php echo $this->tag->textField("isAdmin"); ?>
+        <label for="alamat">Alamat</label>
+        <?php echo $this->tag->textField("alamat"); ?>
+    </p>
+
+    <p>
+        <label for="password">Password</label>
+        <?php echo $this->tag->passwordField("password"); ?>
     </p>
 
     <p>
