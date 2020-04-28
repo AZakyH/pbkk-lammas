@@ -40,8 +40,9 @@ class PcController extends \Phalcon\Mvc\Controller
             
 
         if ($success) {
-            echo "PC telah ditambahkan";
-            header("refresh:2;url=/admin/listPC");
+            // echo "PC telah ditambahkan";
+            // header("refresh:2;url=/admin/listPC");
+            $this->response->redirect('/');
         } else {
             echo "Oops, penambahan PC gagal! Seems like the following issues were encountered: ";
 
@@ -50,6 +51,31 @@ class PcController extends \Phalcon\Mvc\Controller
             foreach ($messages as $message) {
                 echo $message->getMessage(), "<br/>";
             }
+        }
+    }
+
+    public function hapusAction(int $id)
+    {
+        if ($this->session->isAdmin) {    
+            $pc = Pc::findFirst(     // Nyari PC berdasar id_pc yang di-passing
+                [
+                    'conditions' => 'id_pc = :id:',
+                    'bind'       => [
+                        'id' => $id,
+                    ],
+                ]
+            );
+            if($pc->pc_lab == $this->session->isAdmin) {
+                $pc->delete();
+                $this->response->redirect('/admin/listPC');
+            } else {
+                echo "This is not your PC, dude!";
+                header("refresh:2;url=/admin/listPC");
+            }
+        }
+        else {
+            echo "Syapa kaw";
+            header("refresh:2;url=/admin/listPC");
         }
     }
 }
