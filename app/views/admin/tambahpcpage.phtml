@@ -3,7 +3,7 @@
 if ($this->session->isAdmin) { ?>
     <h2>Form tambah PC</h2>
 
-    <?php echo $this->tag->form("/admin/listPC"); ?>
+    <?php echo $this->tag->form("/admin/tambahpc"); ?>
         
         <p>
             <label for="nama">Nama</label>
@@ -41,7 +41,7 @@ if ($this->session->isAdmin) { ?>
         </p>
         
         <p>
-            <?php echo $this->tag->submitButton("Tambah!"); ?>
+            <?php echo $this->tag->submitButton("Tambah!"); echo $this->tag->linkTo("/admin/listPC", " Kembali");?>
         </p>
 
 </form>
