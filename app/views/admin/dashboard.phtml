@@ -1,0 +1,27 @@
+<?php
+
+if ($this->session->isAdmin) {
+    // Retrieve its value
+    $nama = $this->session->nama_user;
+
+    echo "Welcome, Admin " . $nama . "!</br>";
+    echo $this->tag->linkTo("/pengguna/logout", "Logout");
+    ?>
+    <div>
+        <h5>Menu</h5>
+        <ul>
+            <li><?php echo $this->tag->linkTo("/admin/listPC", "Melihat daftar PC"); ?>
+            <li><?php echo $this->tag->linkTo("/admin/logout", "Mengatur reservasi PC"); ?>
+        </ul>
+        <ul>
+            <li><?php echo $this->tag->linkTo("#", "Melihat jadwal pemakaian lab"); ?>
+            <li><?php echo $this->tag->linkTo("#", "Mengonfirmasi peminjaman lab"); ?>
+        </ul>
+    </div>
+
+<?php    
+}
+else {
+    echo "Who are you?";
+    header("refresh:2;url=/pengguna/loginpage");
+}

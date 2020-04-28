@@ -43,10 +43,14 @@ class PenggunaController extends \Phalcon\Mvc\Controller
                  $this->session->set('nama_user', $user->nama);
                  $this->session->set('nrp', $user->nrp);
                  $this->session->set('isAdmin', $user->isAdmin);
-                 return $this->dispatcher->forward(array( 
-                     'controller' => 'index',
-                     'action' => 'index' 
-                 )); 
+                 
+                 echo "Login successful!";
+                 if($user->isAdmin) {
+                    header("refresh:1;url=/admin/dashboard");
+                 }
+                 else {
+                    header("refresh:1;url=/mahasiswa/dashboard");        
+                 }
              }
              else {
                 //Password salah
@@ -66,9 +70,11 @@ class PenggunaController extends \Phalcon\Mvc\Controller
      public function logoutAction() { 
       //   $this->session->remove('auth');
         $this->session->destroy();
-        return $this->dispatcher->forward(array( 
-           'controller' => 'index', 'action' => 'index' 
-        )); 
+        echo "You're logged out";
+        header("refresh:2;url=/");
+      //   return $this->dispatcher->forward(array( 
+      //      'controller' => 'index', 'action' => 'index' 
+      //   )); 
      }
 }
 

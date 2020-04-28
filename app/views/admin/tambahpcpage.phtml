@@ -1,0 +1,54 @@
+<?php
+
+if ($this->session->isAdmin) { ?>
+    <h2>Form tambah PC</h2>
+
+    <?php echo $this->tag->form("admin/tambahpc"); ?>
+        
+        <p>
+            <label for="nama">Nama</label>
+            <?php echo $this->tag->textField("nama"); ?>
+        </p>
+
+        <p>
+            <label for="ip">IP</label>
+            <?php echo $this->tag->textField("ip"); ?>
+        </p>
+
+        <p>
+            <label for="hdd">Ukuran Hardisk</label>
+            <?php echo $this->tag->textField("hdd") ?>
+        </p>
+
+        <p>
+            <label for="ram">RAM</label>
+            <?php echo $this->tag->textField("ram"); ?>
+        </p>
+
+        <p>
+            <label for="processor">Processor</label>
+            <?php echo $this->tag->textField("processor"); ?>
+        </p>
+
+        <p>
+            <label for="gpu">GPU</label>
+            <?php echo $this->tag->textField("gpu"); ?>
+        </p>
+
+        <p>
+            <label for="status">Status</label>
+            <?php echo $this->tag->textField("status"); ?>
+        </p>
+        
+        <p>
+            <?php echo $this->tag->submitButton("Tambah!"); ?>
+        </p>
+
+</form>
+
+<?php    
+}
+else {
+    echo "Who are you?";
+    header("refresh:2;url=/pengguna/loginpage");
+}

@@ -1,0 +1,13 @@
+<?php
+
+if ($this->session->isAdmin == 0) {
+    // Retrieve its value
+    $nama = $this->session->nama_user;
+
+    echo "Welcome, " . $nama . "!</br>";
+    echo $this->tag->linkTo("/pengguna/logout", "Logout");
+}
+else {
+    echo "You must login to see this page";
+    header("refresh:2;url=/pengguna/loginpage");
+}

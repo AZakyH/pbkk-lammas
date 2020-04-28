@@ -33,7 +33,7 @@ class SignupController extends \Phalcon\Mvc\Controller
         }
 
         if ($success) {
-            echo "Thanks you for signing up!";
+            echo "Thank you for signing up!";
             header("refresh:2;url=/");
         } else {
             echo "Oops, seems like the following issues were encountered: ";
