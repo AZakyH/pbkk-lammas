@@ -32,3 +32,29 @@ $router->add(
         "id"       => 1, // ([0-9]
     )
 );
+
+$router->add(
+    "/admin/confirmReservasiPC/([0-9])/:params",
+    array(
+        "controller" => "PermohonanPc",
+        "action"     => "confirm",
+        "id"       => 1, // ([0-9]
+    )
+);
+
+$router->add(
+    "/admin/jadwalPemakaianRuangan/([0-9])/:params",
+    array(
+        "controller" => "PermohonanRuangan",
+        "action"     => "listpr",
+        "id"       => 1, // ([0-9]
+    )
+);
+
+$router->add(
+    "/mahasiswa/reservepc",
+    array(
+        "controller" => "PermohonanPc",
+        "action"     => "reserve",
+    )
+);

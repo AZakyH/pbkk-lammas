@@ -1,0 +1,57 @@
+<?php
+if ($this->session->isAdmin) { ?>
+    <h2>Form tambah PC</h2>
+
+    <p>
+        <label for="nama">Tanggal pengajuan :</label>
+        <?php echo $tanggal; ?>
+    </p>
+
+    <p>
+        <label for="nama">Nama :</label>
+        <?php echo $nama; ?>
+    </p>
+
+    <p>
+        <label for="ip">NRP :</label>
+        <?php echo $nrp; ?>
+    </p>
+
+    <p>
+        <label for="hdd">No. Telepon :</label>
+        <?php echo $no_telp ?>
+    </p>
+
+    <p>
+        <label for="ram">Alamat :</label>
+        <?php echo $alamat; ?>
+    </p>
+
+    <p>
+        <label for="jenis">Jenis permohonan :</label>
+        <?php echo $jenis; ?>
+    </p>
+
+    <p>
+        <label for="keperluan">Keperluan :</label>
+        <?php echo $keperluan; ?>
+    </p>
+    
+    <?php echo $this->tag->form("/admin/confirmReservasiPC/".$id); ?>
+        <p>
+            <label for="status">Status</label>
+            <?php echo $form->render('status', ['required'=>True]); ?>
+        </p>
+        
+        <p>
+            <?php echo $this->tag->submitButton("Ubah!"); echo $this->tag->linkTo("/admin/listReservasiPC/", " Kembali");?>
+        </p>
+
+    </form>
+
+<?php    
+}
+else {
+    echo "Who are you?";
+    header("refresh:2;url=/pengguna/loginpage");
+}

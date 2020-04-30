@@ -5,7 +5,21 @@ if ($this->session->isAdmin == 0) {
     $nama = $this->session->nama_user;
 
     echo "Welcome, " . $nama . "!</br>";
-    echo $this->tag->linkTo("/pengguna/logout", "Logout");
+    echo $this->tag->linkTo(["/pengguna/logout", "Logout", 'class' => 'btn btn-warning']);
+    ?>
+    <div>
+        <h5>Menu</h5>
+        <ul>
+            <li><?php echo $this->tag->linkTo("/mahasiswa/reservasipcpage", "Reservasi PC"); ?>
+            <li><?php echo $this->tag->linkTo("/mahasiswa/logout", "Mengatur reservasi PC"); ?>
+        </ul>
+        <ul>
+            <li><?php echo $this->tag->linkTo("/mahasiswa/jadwalpemakaianruangan", "Melihat jadwal pemakaian lab"); ?>
+            <li><?php echo $this->tag->linkTo("#", "Mengonfirmasi peminjaman lab"); ?>
+        </ul>
+    </div>
+
+<?php    
 }
 else {
     echo "You must login to see this page";

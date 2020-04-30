@@ -1,12 +1,16 @@
 <?php
 declare(strict_types=1);
 
+use Phalcon\Forms\Form;
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Select;
+
 class AdminController extends \Phalcon\Mvc\Controller
 {
 
     public function indexAction()
     {
-
+        echo "ini admin index";
     }
 
     public function dashboardAction()
@@ -25,7 +29,15 @@ class AdminController extends \Phalcon\Mvc\Controller
 
     public function tambahPcPageAction()
     {
-        
+        $form = new Form();
+        $form->add(new Text('nama'));
+        $form->add(new Text('ip'));
+        $form->add(new Text('hdd'));
+        $form->add(new Text('ram'));
+        $form->add(new Text('processor'));
+        $form->add(new Text('gpu'));
+        $form->add(new Text('status'));
+        $this->view->form = $form;
     }
 
     public function tambahPcAction()
@@ -73,5 +85,74 @@ class AdminController extends \Phalcon\Mvc\Controller
             header("refresh:2;url=/");
         }
     }
+
+    public function listReservasiPcAction()
+    {
+        return $this->dispatcher->forward(array( 
+        'controller' => 'PermohonanPc',
+        'action' => 'listppc',
+        'params' => array($this->session->isAdmin)
+        ));
+    }
+
+    public function detailreservasipcAction(int $id)
+    {
+        if ($this->session->isAdmin) {    
+            $ppc = PermohonanPc::findFirst(     // Nyari PPC berdasar id_ppc yang di-passing
+                [
+                    'conditions' => 'id_ppc = :id:',
+                    'bind'       => [
+                        'id' => $id,
+                    ],
+                ]
+            );
+            $pemohon = Pengguna::findFirst(
+                [
+                    'conditions' => 'id_user = :uid:',
+                    'bind'       => [
+                        ':uid' => $ppc->id_user,
+                    ],
+                ]
+            );
+            $form = new Form();
+            $form->add(new Select(
+                'status',
+                [
+                    'Permohonan diterima' => 'Accept',
+                    'Permohonan ditolak' => 'Deny',
+                    'Permohonan selesai' => 'Already done',
+                ],
+                [
+                    'useEmpty'   => true,
+                    'emptyText'  => $ppc->status,
+                ],
+            ));
+            
+            if($ppc->lab == $this->session->isAdmin) {
+                $this->view->setVars(
+                    [
+                        'tanggal'   => $ppc->tanggal,
+                        'id'        => $ppc->id_ppc,
+                        'nama'      => $pemohon->nama,
+                        'nrp'       => $pemohon->nrp,
+                        'no_telp'   => $pemohon->no_telp,
+                        'alamat'    => $pemohon->alamat,
+                        'jenis'     => $ppc->jenis,
+                        'keperluan' => $ppc->keperluan,
+                        'form'      => $form
+                    ]
+                );
+
+            } else {
+                echo "This is not your lab's permohonan PC, dude!";
+                header("refresh:2;url=/admin/listReservasiPC");
+            }
+        }
+        else {
+            echo "Syapa kaw";
+            header("refresh:2;url=/");
+        }
+    }
+
 }
 

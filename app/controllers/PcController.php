@@ -11,7 +11,7 @@ class PcController extends \Phalcon\Mvc\Controller
 
     public function listAction(int $lab)
     {
-        $pcs = Pc::find(     // Nyari user berdasar NRP yang diinput
+        $pcs = Pc::find(     // 
             [
                 'conditions' => 'pc_lab = :lab:',
                 'bind'       => [

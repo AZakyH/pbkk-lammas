@@ -7,37 +7,37 @@ if ($this->session->isAdmin) { ?>
         
         <p>
             <label for="nama">Nama</label>
-            <?php echo $this->tag->textField("nama"); ?>
+            <?php echo $form->render('nama', ['required'=>True]); ?>
         </p>
 
         <p>
             <label for="ip">IP</label>
-            <?php echo $this->tag->textField("ip"); ?>
+            <?php echo $form->render('ip', ['required'=>True]); ?>
         </p>
 
         <p>
             <label for="hdd">Ukuran Hardisk</label>
-            <?php echo $this->tag->textField("hdd") ?>
+            <?php echo $form->render('hdd', ['required'=>True]); ?>
         </p>
 
         <p>
             <label for="ram">RAM</label>
-            <?php echo $this->tag->textField("ram"); ?>
+            <?php echo $form->render('ram', ['required'=>True]); ?>
         </p>
 
         <p>
             <label for="processor">Processor</label>
-            <?php echo $this->tag->textField("processor"); ?>
+            <?php echo $form->render('processor', ['required'=>True]); ?>
         </p>
 
         <p>
             <label for="gpu">GPU</label>
-            <?php echo $this->tag->textField("gpu"); ?>
+            <?php echo $form->render('gpu', ['required'=>True]); ?>
         </p>
 
         <p>
             <label for="status">Status</label>
-            <?php echo $this->tag->textField("status"); ?>
+            <?php echo $form->render('status', ['required'=>True]); ?>
         </p>
         
         <p>

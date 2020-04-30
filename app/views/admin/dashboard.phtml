@@ -3,6 +3,7 @@
 if ($this->session->isAdmin) {
     // Retrieve its value
     $nama = $this->session->nama_user;
+    $lab = $this->session->isAdmin;
 
     echo "Welcome, Admin " . $nama . "!</br>";
     echo $this->tag->linkTo("/pengguna/logout", "Logout");
@@ -11,10 +12,10 @@ if ($this->session->isAdmin) {
         <h5>Menu</h5>
         <ul>
             <li><?php echo $this->tag->linkTo("/admin/listPC", "Melihat daftar PC"); ?>
-            <li><?php echo $this->tag->linkTo("/admin/logout", "Mengatur reservasi PC"); ?>
+            <li><?php echo $this->tag->linkTo("/admin/listReservasiPC/", "Mengatur reservasi PC"); ?>
         </ul>
         <ul>
-            <li><?php echo $this->tag->linkTo("#", "Melihat jadwal pemakaian lab"); ?>
+            <li><?php echo $this->tag->linkTo("/admin/jadwalPemakaianRuangan/".$this->session->isAdmin, "Melihat jadwal pemakaian lab"); ?>
             <li><?php echo $this->tag->linkTo("#", "Mengonfirmasi peminjaman lab"); ?>
         </ul>
     </div>

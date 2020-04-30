@@ -1,0 +1,36 @@
+<?php
+
+if ($this->session->has('nama_user')) { ?>
+    <h2>Form Reservasi PC</h2>
+
+    <?php echo $this->tag->form("/mahasiswa/reservepc"); ?>
+        
+        <p>            
+            <label for="lab">Lab tujuan</label>
+            <?php echo $form->render('lab', ['required'=>True]); ?>
+        </p>
+        <p>            
+            <label for="jenis">Jenis permohonan</label>
+            <?php echo $form->render('jenis', ['required'=>True]); ?>
+        </p>
+        <p>
+            <label for="keperluan">Keperluan</label>
+            <?php echo $form->render('keperluan', ['required'=>True]); ?>
+        </p>        
+        <p>
+            <?php echo $this->tag->submitButton("Request!"); echo $this->tag->linkTo("/mahasiswa/reservepc", " Kembali");?>
+        </p>
+
+
+</form>
+        <?php if($this->flashSession->has('success')){ 
+            echo $this->flash->output();
+        }
+        ?>  
+
+<?php    
+}
+else {
+    echo "Who are you?";
+    header("refresh:2;url=/pengguna/loginpage");
+}
