@@ -154,5 +154,62 @@ class AdminController extends \Phalcon\Mvc\Controller
         }
     }
 
+    public function detailreservasilabAction(int $id)
+    {
+        if ($this->session->isAdmin) {    
+            $pr = PermohonanRuangan::findFirst(     // Nyari PPC berdasar id_ppc yang di-passing
+                [
+                    'conditions' => 'id_plab = :id:',
+                    'bind'       => [
+                        'id' => $id,
+                    ],
+                ]
+            );
+            $pemohon = Pengguna::findFirst(
+                [
+                    'conditions' => 'id_user = :uid:',
+                    'bind'       => [
+                        ':uid' => $pr->id_user,
+                    ],
+                ]
+            );
+            $form = new Form();
+            $form->add(new Select(
+                'status',
+                [
+                    'Permohonan diterima' => 'Accept',
+                    'Permohonan ditolak' => 'Deny',
+                    'Permohonan selesai' => 'Already done',
+                ],
+                [
+                    'useEmpty'   => true,
+                    'emptyText'  => $pr->status,
+                ],
+            ));
+            
+            if($pr->id_lab == $this->session->isAdmin) {
+                $this->view->setVars(
+                    [
+                        'tanggal'   => $pr->tanggal,
+                        'id'        => $pr->id_plab,
+                        'nama'      => $pemohon->nama,
+                        'nrp'       => $pemohon->nrp,
+                        'no_telp'   => $pemohon->no_telp,
+                        'alamat'    => $pemohon->alamat,
+                        'keperluan' => $pr->keperluan,
+                        'form'      => $form
+                    ]
+                );
+
+            } else {
+                echo "This is not your lab's permohonan reservasi lab, dude!";
+                header("refresh:2;url=/admin/jadwalPemakaianRuangan/".$this->session->isAdmin);
+            }
+        }
+        else {
+            echo "Syapa kaw";
+            header("refresh:2;url=/");
+        }
+    }
 }
 

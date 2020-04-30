@@ -1,13 +1,22 @@
 <?php
 
 use Phalcon\Security;
+use Phalcon\Forms\Form;
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Password;
 
 class SignupController extends \Phalcon\Mvc\Controller
 {
 
     public function indexAction()
-    {
-
+    {   
+        $form = new Form();
+        $form->add(new Text('nama'));
+        $form->add(new Text('nrp'));
+        $form->add(new Text('no_telp'));
+        $form->add(new Text('alamat'));
+        $form->add(new Password('password'));
+        $this->view->form = $form;
     }
     
     public function registerAction()

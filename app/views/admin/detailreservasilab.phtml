@@ -1,0 +1,51 @@
+<?php
+
+if ($this->session->isAdmin) { ?>
+    <h2>Detail Reservasi Lab</h2>
+
+    <p>
+        <label for="nama">Nama :</label>
+        <?php echo $nama ?>
+    </p>
+    <p>
+        <label for="nrp">NRP :</label>
+        <?php echo $nrp ?>
+    </p>
+    <p>
+        <label for="no_telp">No. Telepon :</label>
+        <?php echo $no_telp ?>
+    </p>
+    <p>
+        <label for="alamat">Alamat :</label>
+        <?php echo $alamat ?>
+    </p>
+    <p>
+        <label for="keperluan">Keperluan :</label>
+        <?php echo $keperluan ?>
+    </p>
+    <p>
+        <label for="tanggal">tanggal :</label>
+        <?php echo $tanggal ?>
+    </p>
+    <?php echo $this->tag->form("/admin/confirmReservasiLab/".$id); ?>
+    <p>            
+        <label for="status">Status :</label>
+        <?php echo $form->render('status', ['required'=>True]); ?>
+    </p>
+        <p>
+            <?php echo $this->tag->submitButton("Update!"); echo $this->tag->linkTo("/admin/listPermohonanRuangan/".$this->session->isAdmin, " Kembali");?>
+        </p>
+
+
+</form>
+        <?php if($this->flashSession->has('success')){ 
+            echo $this->flash->output();
+        }
+        ?>  
+
+<?php    
+}
+else {
+    echo "Who are you?";
+    header("refresh:2;url=/pengguna/loginpage");
+}

@@ -6,7 +6,8 @@ if ($this->session->isAdmin) {
     $lab = $this->session->isAdmin;
 
     echo "Welcome, Admin " . $nama . "!</br>";
-    echo $this->tag->linkTo("/pengguna/logout", "Logout");
+    echo $this->tag->linkTo(["/pengguna/logout", "Logout", 'class' => 'btn btn-warning']);
+
     ?>
     <div>
         <h5>Menu</h5>
@@ -16,7 +17,7 @@ if ($this->session->isAdmin) {
         </ul>
         <ul>
             <li><?php echo $this->tag->linkTo("/admin/jadwalPemakaianRuangan/".$this->session->isAdmin, "Melihat jadwal pemakaian lab"); ?>
-            <li><?php echo $this->tag->linkTo("#", "Mengonfirmasi peminjaman lab"); ?>
+            <li><?php echo $this->tag->linkTo("/admin/listPermohonanRuangan/".$this->session->isAdmin, "Mengonfirmasi peminjaman lab"); ?>
         </ul>
     </div>
 

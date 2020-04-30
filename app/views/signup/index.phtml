@@ -4,31 +4,33 @@
     
     <p>
         <label for="nama">Nama</label>
-        <?php echo $this->tag->textField("nama"); ?>
+        <?php echo $form->render('nama'); ?>
     </p>
 
     <p>
         <label for="nrp">NRP</label>
-        <?php echo $this->tag->textField("nrp"); ?>
+        <?php echo $form->render('nrp'); ?>
     </p>
 
     <p>
         <label for="no_telp">Nomor Telepon</label>
-        <?php echo $this->tag->textField("no_telp"); ?>
+        <?php echo $form->render('no_telp'); ?>
     </p>
 
     <p>
         <label for="alamat">Alamat</label>
-        <?php echo $this->tag->textField("alamat"); ?>
+        <?php echo $form->render('alamat'); ?>
     </p>
 
     <p>
         <label for="password">Password</label>
-        <?php echo $this->tag->passwordField("password"); ?>
+        <?php echo $form->render('password'); ?>
     </p>
 
     <p>
         <?php echo $this->tag->submitButton("Register"); ?>
     </p>
+    <?php echo $this->tag->linkTo("/", " Kembali"); ?>
+
 
 </form>

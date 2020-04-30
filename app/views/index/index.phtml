@@ -5,7 +5,11 @@ if ($this->session->has('nama_user')) {
     $nama = $this->session->nama_user;
 
     echo "Welcome " . $nama . "!</br>";
-    echo $this->tag->linkTo("/pengguna/logout", "Logout");
+    if($this->session->isAdmin) {
+        echo $this->tag->linkTo(["/admin/dashboard", "Dashboard", 'class' => 'btn btn-info']);
+    }
+    echo $this->tag->linkTo(["/pengguna/logout", "Logout", 'class' => 'btn btn-warning']);
+
 }
 else {
     ?>

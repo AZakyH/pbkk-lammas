@@ -1,0 +1,54 @@
+<?php
+if ($this->session->has('nama_user')) {
+
+    echo "<h5>Jadwal Ruangan Lab " . $namalab . "<h5>";
+    if(!$this->session->isAdmin) {   
+        echo $this->tag->linkTo("/mahasiswa/reservelabpage", "Reservasi lab")."</br>";
+    }
+    if($this->session->isAdmin) {   
+        echo $this->tag->linkTo("/admin/dashboard", "Kembali ke dashboard");
+    } else {
+        echo $this->tag->linkTo("/mahasiswa/dashboard", "Kembali ke dashboard");
+    }
+
+    foreach ($prs as $pr) { ?>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>Waktu</th>
+            <th>Keperluan</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <?php 
+        $i=1;
+        foreach ($prs as $pr) { ?>
+            <tr>
+                <td><?php echo $i; ?></td>
+                <td><?php echo $pr->tanggal; ?></td>
+                <td><?php echo $pr->keperluan; ?></td>
+
+            </tr>
+        <?php $i++; } ?>
+        </tbody>
+    </table>
+
+    <?php    
+    }
+}
+else {
+echo "You must login to see this page";
+header("refresh:2;url=/pengguna/loginpage");
+}
+// if($this->session->isAdmin)
+// {   
+//     echo "<th></th>";
+// }
+// if($this->session->isAdmin)
+// {   
+//     echo "<td>";
+//     echo $this->tag->linkTo("/admin/detailreservasilab/".$pr->id_plab, "Lihat detail");
+//     echo "</td>";
+// }

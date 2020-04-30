@@ -82,7 +82,7 @@ class MahasiswaController extends \Phalcon\Mvc\Controller
 
                 return $this->dispatcher->forward(array( 
                     'controller' => 'PermohonanRuangan',
-                    'action' => 'listpr',
+                    'action' => 'jadwallab',
                     'params' => array($dataSent["lab"])
                     ));
             }

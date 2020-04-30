@@ -1,5 +1,5 @@
 <?php
-if ($this->session->has('nama_user')) {
+if ($this->session->isAdmin) {
 
     echo "<h5>List Reservasi Ruangan Lab " . $namalab . "<h5>";
     if(!$this->session->isAdmin) {   
@@ -18,6 +18,8 @@ if ($this->session->has('nama_user')) {
             <th>#</th>
             <th>Waktu</th>
             <th>Keperluan</th>
+            <th>Status</th>
+            <th>Permohonan masuk</th>
             <?php
                 if($this->session->isAdmin)
                 {   
@@ -29,21 +31,28 @@ if ($this->session->has('nama_user')) {
         <tbody>
         <?php 
         $i=1;
-        foreach ($prs as $pr) { ?>
-            <tr>
+        foreach ($prs as $pr) { 
+            if($pr->status == "Permohonan ditolak"){
+                echo "<tr style='color:red;'>";
+            } elseif($pr->status == "Permohonan diterima"){
+                echo "<tr style='color:green;'>";
+            }
+            ?>
                 <td><?php echo $i; ?></td>
                 <td><?php echo $pr->tanggal; ?></td>
                 <td><?php echo $pr->keperluan; ?></td>
+                <td><?php echo $pr->status; ?></td>
+                <td><?php echo $pr->created_at; ?></td>
                 <?php
                     if($this->session->isAdmin)
                     {   
                         echo "<td>";
-                        echo $this->tag->linkTo("/admin/detailreservasilab/".$pr->id_pr, "Lihat detail");
+                        echo $this->tag->linkTo("/admin/detailreservasilab/".$pr->id_plab, "Lihat detail");
                         echo "</td>";
                     }
                 ?>
             </tr>
-        <?php $i++; } ?>
+        <?php $i++; }?>
         </tbody>
     </table>
 
@@ -51,6 +60,6 @@ if ($this->session->has('nama_user')) {
     }
 }
 else {
-echo "You must login to see this page";
+echo "Syapa kaw";
 header("refresh:2;url=/pengguna/loginpage");
 }

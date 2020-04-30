@@ -46,7 +46,25 @@ $router->add(
     "/admin/jadwalPemakaianRuangan/([0-9])/:params",
     array(
         "controller" => "PermohonanRuangan",
+        "action"     => "jadwallab",
+        "id"       => 1, // ([0-9]
+    )
+);
+
+$router->add(
+    "/admin/listPermohonanRuangan/([0-9])/:params",
+    array(
+        "controller" => "PermohonanRuangan",
         "action"     => "listpr",
+        "id"       => 1, // ([0-9]
+    )
+);
+
+$router->add(
+    "/admin/confirmReservasiLab/([0-9])/:params",
+    array(
+        "controller" => "PermohonanRuangan",
+        "action"     => "confirm",
         "id"       => 1, // ([0-9]
     )
 );
