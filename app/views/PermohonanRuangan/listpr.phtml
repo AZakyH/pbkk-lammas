@@ -2,6 +2,9 @@
 if ($this->session->has('nama_user')) {
 
     echo "<h5>List Reservasi Ruangan Lab " . $namalab . "<h5>";
+    if(!$this->session->isAdmin) {   
+        echo $this->tag->linkTo("/mahasiswa/reservelabpage", "Reservasi lab")."</br>";
+    }
     if($this->session->isAdmin) {   
         echo $this->tag->linkTo("/admin/dashboard", "Kembali ke dashboard");
     } else {

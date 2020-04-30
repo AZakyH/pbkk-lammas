@@ -58,3 +58,11 @@ $router->add(
         "action"     => "reserve",
     )
 );
+
+$router->add(
+    "/mahasiswa/reservelab",
+    array(
+        "controller" => "PermohonanRuangan",
+        "action"     => "reservel",
+    )
+);

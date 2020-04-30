@@ -96,5 +96,25 @@ class MahasiswaController extends \Phalcon\Mvc\Controller
             header("refresh:2;url=/mahasiswa/dashboard");
         }
     }
+
+    public function reservelabpageAction()
+    {
+        $labs = Laboratorium::find(
+            ['columns' => 'id_lab, nama_lab']
+        );
+
+        $form = new Form();
+        $form->add(New Select(
+            'lab',
+            $labs,
+            [
+                'using' => ['id_lab', 'nama_lab'],
+                'useEmpty'   => true,
+                'emptyText'  => 'Pilih lab yang ingin direservasi',
+            ]
+        ));
+        $form->add(new TextArea('keperluan'));
+        $this->view->form = $form;
+    }
 }
 
