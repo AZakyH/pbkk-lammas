@@ -4,13 +4,16 @@ if ($this->session->isAdmin == 0) {
     // Retrieve its value
     $nama = $this->session->nama_user;
 
-    echo "<h2>Welcome to Lammas, " . $nama . "!<h2>";
+    echo "Welcome, " . $nama . "!</br>";
     echo $this->tag->linkTo(["/pengguna/logout", "Logout", 'class' => 'btn btn-warning']);
     ?>
-    <div class="box col-md-6">
+    <div>
         <h5>Menu</h5>
         <ul>
             <li><?php echo $this->tag->linkTo("/mahasiswa/reservasipcpage", "Reservasi PC"); ?>
+            <li><?php echo $this->tag->linkTo("/mahasiswa/logout", "Mengatur reservasi PC"); ?>
+        </ul>
+        <ul>
             <li><?php echo $this->tag->linkTo("/mahasiswa/jadwalpemakaianruangan", "Melihat jadwal pemakaian lab"); ?>
         </ul>
     </div>
@@ -20,19 +23,4 @@ if ($this->session->isAdmin == 0) {
 else {
     echo "You must login to see this page";
     header("refresh:2;url=/pengguna/loginpage");
-} ?>
-
-<style>
-h2{
-    margin:20px;
-    text-align:left;
 }
-li{
-    font-size:22px;
-}
-body{
-    background-image: url("<?php echo $this->url->get('img/Lammas_Logo.png')?>");
-    background-repeat: no-repeat;
-    background-position: center;height: 500px;
-}
-</style>

@@ -1,3 +1,37 @@
+<?php
+
+if ($this->session->has('nama_user')) {
+    // Retrieve its value
+    $nama = $this->session->nama_user;
+
+    echo "Welcome " . $nama . "!</br>";
+    if($this->session->isAdmin) {
+        echo $this->tag->linkTo(["/admin/dashboard", "Dashboard", 'class' => 'btn btn-info']);
+    }
+    echo $this->tag->linkTo(["/pengguna/logout", "Logout", 'class' => 'btn btn-warning']);
+
+}
+else {
+    ?>
+    <div class="page-header">
+        <h1>Welcome to Lammas</h1>
+    </div>
+    <p>
+        Already have an account?</br>Login below!</br>
+        <?php
+        echo $this->tag->linkTo(
+            "/pengguna/loginpage",
+            "Login"
+        );?>
+    </p>
+    <p>Don't have one? <?php echo $this->tag->linkTo("signup", "Sign Up Here!");?></p>
+    <?php
+}
+
+
+
+
+
 
 <div class="container row-md-12">
     <?php
@@ -29,24 +63,3 @@
     }
     ?>
 </div>
-
-<style>
-body {
-    /* background-color: #E5E9EC; */
-    text-align: center;
-    margin:auto;
-}
-
-.box{
-      background-color: white;
-      box-shadow: 0px 10px 8px #888888;
-      border-radius: 15px;
-      padding: 20px;
-      margin:auto;
-      float:none;
-}
-
-.page-header{
-      margin:auto;
-}
-</style>
