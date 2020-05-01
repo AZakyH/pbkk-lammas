@@ -10,7 +10,7 @@ class AdminController extends \Phalcon\Mvc\Controller
 
     public function indexAction()
     {
-        echo "ini admin index";
+
     }
 
     public function dashboardAction()

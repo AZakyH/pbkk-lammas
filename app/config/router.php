@@ -7,7 +7,7 @@ $router = $di->getRouter();
 $router->handle($_SERVER['REQUEST_URI']);
 
 $router->add(
-    "/admin/updatePC/([0-9])/:params",
+    "/admin/updatePC/([0-9]+)/:params",
     array(
         "controller" => "pc",
         "action"     => "update",
@@ -16,7 +16,7 @@ $router->add(
 );
 
 $router->add(
-    "/admin/editPC/([0-9])/:params",
+    "/admin/editPC/([0-9]+)/:params",
     array(
         "controller" => "admin",
         "action"     => "editpc",
@@ -25,7 +25,7 @@ $router->add(
 );
 
 $router->add(
-    "/admin/hapusPC/([0-9])/:params",
+    "/admin/hapusPC/([0-9]+)/:params",
     array(
         "controller" => "pc",
         "action"     => "hapus",
@@ -34,7 +34,7 @@ $router->add(
 );
 
 $router->add(
-    "/admin/confirmReservasiPC/([0-9])/:params",
+    "/admin/confirmReservasiPC/([0-9]+)/:params",
     array(
         "controller" => "PermohonanPc",
         "action"     => "confirm",
@@ -43,7 +43,7 @@ $router->add(
 );
 
 $router->add(
-    "/admin/jadwalPemakaianRuangan/([0-9])/:params",
+    "/admin/jadwalPemakaianRuangan/([0-9]+)/:params",
     array(
         "controller" => "PermohonanRuangan",
         "action"     => "jadwallab",
@@ -52,7 +52,7 @@ $router->add(
 );
 
 $router->add(
-    "/admin/listPermohonanRuangan/([0-9])/:params",
+    "/admin/listPermohonanRuangan/([0-9]+)/:params",
     array(
         "controller" => "PermohonanRuangan",
         "action"     => "listpr",
@@ -61,7 +61,7 @@ $router->add(
 );
 
 $router->add(
-    "/admin/confirmReservasiLab/([0-9])/:params",
+    "/admin/confirmReservasiLab/([0-9]+)/:params",
     array(
         "controller" => "PermohonanRuangan",
         "action"     => "confirm",
